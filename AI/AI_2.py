@@ -36,12 +36,29 @@ def TEACH(n: Neuron):
 
 D = 0.2
 B = 6
+A = 0
 
 neuron1 = Neuron([23, 4], [-2, 0.1])
-print(ACTIVATE(neuron1, B))
+for i in range(1, 50):
+    if i == 1:
+        A = ACTIVATE(neuron1, B)
 
-print(neuron1.w)
-neuron1.w = RETURN_NEW_W(D, neuron1.w, neuron1.x, False)
+        print(f'FIRST >> W: {neuron1.w}, B: {B}')
+        print(f'{i} >> {A}')
+        print()
+    else:
+        is_positive = False
+        if A < 0:
+            is_positive = False
+        else:
+            is_positive = True
 
-print(type(neuron1))
-TEACH(neuron1)
+        # ACTIONS
+        print(f'BEFORE >> W: {neuron1.w}, B: {B}, IS_POSITIVE: {is_positive}')
+
+        neuron1.w = RETURN_NEW_W(D, neuron1.w, neuron1.x, is_positive)
+        B = RETURN_NEW_B(D, B, is_positive)
+
+        print(f'AFTER >> W: {neuron1.w}, B: {B}, IS_POSITIVE: {is_positive}')
+        print(f'{i} >> {ACTIVATE(neuron1, B)}')
+        print()
