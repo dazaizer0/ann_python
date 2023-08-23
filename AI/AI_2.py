@@ -1,3 +1,4 @@
+# zamien is positive na czy jest poprawne i jakie powu=inno byc a nie jakie jest
 class Neuron:
     def __init__(self, x, w):
         self.x = x
@@ -14,10 +15,10 @@ def ACTIVATE(n: Neuron,
 def RETURN_NEW_W(d, w, x, is_positive):
     if is_positive:
         for i in range(0, len(w)):
-            w[i] = w[i] + (x[i] * d * 1)
+            w[i] = w[i] + x[i] * d * 1
     else:
         for i in range(0, len(w)):
-            w[i] = w[i] + (x[i] * d * -1)
+            w[i] = w[i] + x[i] * d * -1
 
     return w
 
