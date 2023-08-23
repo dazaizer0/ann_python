@@ -1,8 +1,9 @@
 # zamien is positive na czy jest poprawne i jakie powu=inno byc a nie jakie jest
 class Neuron:
-    def __init__(self, x, w):
+    def __init__(self, x, w, answer: bool):
         self.x = x
         self.w = w
+        self.answer = answer
 
 
 def ACTIVATE(n: Neuron,
@@ -39,20 +40,22 @@ D = 0.2
 B = 6
 A = 0
 
-neuron1 = Neuron([23, 4], [-2, 0.1])
+neuron1 = Neuron([23, 4], [-2, 0.1], True)
 for i in range(1, 50):
     if i == 1:
         A = ACTIVATE(neuron1, B)
 
         print(f'FIRST >> W: {neuron1.w}, B: {B}')
         print(f'{i} >> {A}')
+
+        if A > 0:
+            print("O+")
+        else:
+            print("D-")
+
         print()
     else:
-        is_positive = False
-        if A < 0:
-            is_positive = False
-        else:
-            is_positive = True
+        is_positive = neuron1.answer
 
         # ACTIONS
         print(f'BEFORE >> W: {neuron1.w}, B: {B}, IS_POSITIVE: {is_positive}')
@@ -61,5 +64,12 @@ for i in range(1, 50):
         B = RETURN_NEW_B(D, B, is_positive)
 
         print(f'AFTER >> W: {neuron1.w}, B: {B}, IS_POSITIVE: {is_positive}')
-        print(f'{i} >> {ACTIVATE(neuron1, B)}')
+        A = ACTIVATE(neuron1, B)
+        print(f'{i} >> {A}')
+
+        if A > 0:
+            print("O+")
+        else:
+            print("D-")
+
         print()
