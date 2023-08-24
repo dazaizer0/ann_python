@@ -123,3 +123,19 @@ while neuron1.nreturn != neuron1.answer:
 
 file.write(f'{A} | {neuron1.w} | {B} | {neuron1.answer}\n')
 file.close()
+
+COM = ""
+while COM != "end":
+    COM = input("start or end:: ")
+    if COM == "end":
+        break
+    else:
+        X1 = float(input("x1: "))
+        X2 = float(input("x2: "))
+
+        neuron2 = Neuron([X1, X2], neuron1.w, False, not False)
+        A = ACTIVATE(neuron2, B)
+        if A > 0:
+            print("Obraczka")
+        else:
+            print("dlugopis")
