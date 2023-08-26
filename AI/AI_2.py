@@ -130,8 +130,8 @@ while COM != "end":
     if COM == "end":
         break
     else:
-        X1 = float(input("x1: "))
-        X2 = float(input("x2: "))
+        X1 = float(input("x1 [o-y]: "))
+        X2 = float(input("x2 [o-x]: "))
 
         neuron2 = Neuron([X1, X2], neuron1.w, False, not False)
         A = ACTIVATE(neuron2, B)
