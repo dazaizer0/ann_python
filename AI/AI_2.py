@@ -1,5 +1,5 @@
 # zamien is positive na czy jest poprawne i jakie powu=inno byc a nie jakie jest
-file = open("aidata.js", 'a')
+file = open("aidata.txt", 'a')
 
 class Neuron:
     def __init__(self, x, w, answer: bool, nreturn: bool):
@@ -46,7 +46,7 @@ def LOG(x, w, b, a, nret, answ):
     file.write('\n')
 
 
-D = 0.01
+D = 0.005
 B = 4
 A = 0
 
@@ -122,12 +122,14 @@ while neuron1.nreturn != neuron1.answer:
 
 
 file.write(f'{A} | {neuron1.w} | {B} | {neuron1.answer}\n')
-file.close()
+
 
 COM = ""
 while COM != "end":
-    COM = input("start or end:: ")
+    print("com | com = any, com = end")
+    COM = input("com :: ")
     if COM == "end":
+        file.close()
         break
     else:
         X1 = float(input("x1 [o-y]: "))
@@ -135,6 +137,8 @@ while COM != "end":
 
         neuron2 = Neuron([X1, X2], neuron1.w, False, not False)
         A = ACTIVATE(neuron2, B)
+        file.write(f'USER-INPUT >>> X1[oy]: {X1}, X2[ox]: {X2}, W: {neuron1.w}, B: {B}, FINAL A: {A} <<< \n')
+
         if A > 0:
             print("Obraczka")
         else:
