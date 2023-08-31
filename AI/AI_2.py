@@ -9,6 +9,86 @@ class Neuron: # answer = True = ring | answer = False = pen
         self.answer = answer
         self.nreturn = nreturn
 
+    def ACTIVATE_THIS(self,
+                    b: float) -> float:
+        for i in range(0, len(self.x), 2):
+            a = ((self.x[i] * self.w[i]) + (self.x[i + 1] * self.w[i + 1])) + b
+            return a
+
+    def TEACH_THIS(self, D, B, A, neuron1):
+        i = 1
+        file = open("aidata.txt", 'a')
+        while neuron1.nreturn != neuron1.answer:
+            if i == 1:
+                A = ACTIVATE(neuron1, B)
+
+                print(f'NEURON >> X: {self.x}')
+                print(f'FIRST >> W: {self.w}, B: {B}')
+                print(f'{i} >> {A}')
+
+                if self.answer:
+                    if A > 0:
+                        self.nreturn = True
+                    elif A < 0:
+                        self.nreturn = False
+                else:
+                    if A < 0:
+                        self.nreturn = False
+                    elif A < 0:
+                        self.nreturn = True
+
+                if self.answer == self.nreturn:
+                    if self.answer:
+                        print("ring")
+                        file.write('False /ring\n')
+                    else:
+                        print("pen")
+                        file.write('True /pen\n')
+                else:
+                    print("...")
+
+                LOG(self.x, self.w, B, A, self.nreturn, self.answer)
+                print()
+            else:
+                is_positive = self.answer
+
+                print(f'BEFORE >> W: {self.w}, B: {B}, IS_POSITIVE: {is_positive}')
+
+                self.w = RETURN_NEW_W(D, self.w, self.x, is_positive)
+                B = RETURN_NEW_B(D, B, is_positive)
+
+                print(f'AFTER >> W: {self.w}, B: {B}, IS_POSITIVE: {is_positive}')
+                A = ACTIVATE(neuron1, B)
+                print(f'{i} >> {A}')
+
+                if self.answer:
+                    if A > 0:
+                        self.nreturn = True
+                    elif A < 0:
+                        self.nreturn = False
+                else:
+                    if A < 0:
+                        self.nreturn = False
+                    elif A < 0:
+                        self.nreturn = True
+
+                if self.answer == self.nreturn:
+                    if self.answer:
+                        print("ring")
+                        file.write('False /ring\n')
+                    else:
+                        print("pen")
+                        file.write('True /pen\n')
+                else:
+                    print("...")
+
+                LOG(self.x, self.w, B, A, self.nreturn, self.answer)
+                print()
+            i += 1
+        file.write(f'{A} | {self.w} | {B} | {self.answer}\n')
+        file.close()
+
+
 class Model:  # --------------------------------------------------------------------------------------------------------
     def __int__(self):
         model = tf.keras.Sequential([
