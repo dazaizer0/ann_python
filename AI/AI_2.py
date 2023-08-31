@@ -1,13 +1,21 @@
-# zamien is positive na czy jest poprawne i jakie powu=inno byc a nie jakie jest
 from datetime import datetime
+import tensorflow as tf
+D: float
 
-class Neuron: # answer = False = Obraczka | answer = True = Dlugopis
+class Neuron: # answer = True = ring | answer = False = pen
     def __init__(self, x, w, answer: bool, nreturn: bool):
         self.x = x
         self.w = w
         self.answer = answer
         self.nreturn = nreturn
 
+class Model:  # --------------------------------------------------------------------------------------------------------
+    def __int__(self):
+        model = tf.keras.Sequential([
+            tf.keras.layers.Flatten(input_shape=(28, 28)),
+            tf.keras.layers.Dense(128, activation='relu'),
+            tf.keras.layers.Dense(10)
+        ])
 
 def ACTIVATE(n: Neuron,
              b: float) -> float:
@@ -34,10 +42,6 @@ def RETURN_NEW_B(d, b, is_positive):
         return b + -1 * d
 
 
-def TEACH(n: Neuron):
-    print(n.x)
-    print(n.w)
-
 def LOG(x, w, b, a, nret, answ):
     file = open("aidata.txt", 'a')
     file.write('\n')
@@ -58,10 +62,11 @@ def TEACH(D, B, A, neuron1: Neuron):
         if i == 1:
             A = ACTIVATE(neuron1, B)
 
+            print(f'NEURON >> X: {neuron1.x}')
             print(f'FIRST >> W: {neuron1.w}, B: {B}')
             print(f'{i} >> {A}')
 
-            if neuron1.answer == True:
+            if neuron1.answer:
                 if A > 0:
                     neuron1.nreturn = True
                 elif A < 0:
@@ -73,12 +78,12 @@ def TEACH(D, B, A, neuron1: Neuron):
                     neuron1.nreturn = True
 
             if neuron1.answer == neuron1.nreturn:
-                if neuron1.answer == True:
-                    print("Obraczka")
-                    file.write('False /obraczka\n')
+                if neuron1.answer:
+                    print("ring")
+                    file.write('False /ring\n')
                 else:
-                    print("Dlugopis")
-                    file.write('True /dlugopis\n')
+                    print("pen")
+                    file.write('True /pen\n')
             else:
                 print("...")
 
@@ -96,7 +101,7 @@ def TEACH(D, B, A, neuron1: Neuron):
             A = ACTIVATE(neuron1, B)
             print(f'{i} >> {A}')
 
-            if neuron1.answer == True:
+            if neuron1.answer:
                 if A > 0:
                     neuron1.nreturn = True
                 elif A < 0:
@@ -108,12 +113,12 @@ def TEACH(D, B, A, neuron1: Neuron):
                     neuron1.nreturn = True
 
             if neuron1.answer == neuron1.nreturn:
-                if neuron1.answer == True:
-                    print("Obraczka")
-                    file.write('False /obraczka\n')
+                if neuron1.answer:
+                    print("ring")
+                    file.write('False /ring\n')
                 else:
-                    print("Dlugopis")
-                    file.write('True /dlugopis\n')
+                    print("pen")
+                    file.write('True /pen\n')
             else:
                 print("...")
 
@@ -123,3 +128,23 @@ def TEACH(D, B, A, neuron1: Neuron):
     file.write(f'{A} | {neuron1.w} | {B} | {neuron1.answer}\n')
     file.close()
 
+def TEST_NEURON_SIMPLE_RP(B, A, neuron1: Neuron):
+    COM = ""
+    while COM != "end":
+        print("com | com = any = start, com = end = end")
+        COM = input("com :: ")
+        if COM == "end":
+            break
+        else:
+            X1 = float(input("x1 [o-y]: "))
+            X2 = float(input("x2 [o-x]: "))
+            TEMP_X = [X1, X2]
+
+            neuron2 = Neuron([X1, X2], neuron1.w, False, not False)
+            A = ACTIVATE(neuron2, B)
+            LOG(TEMP_X, neuron1.w, B, A, False, not False)
+
+            if A > 0:
+                print("False / ring")
+            else:
+                print("True / pen")
