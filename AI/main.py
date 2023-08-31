@@ -1,29 +1,28 @@
-class Neuron:
-    def __init__(self, x1, x2, w1, w2):
-        self.x1 = x1
-        self.w1 = w1
-        self.x2 = x2
-        self.w2 = w2
+import AI_2 as AI
 
+D = 0.0001
+B = 4
+A = 0
 
-def activate(n: Neuron, b):
-    a = ((n.x1 * n.w1) + (n.x2 * n.w2)) + b
-    return a
+neuron1 = AI.Neuron([18, 34], [2, 3], False, not False)
+AI.TEACH(D, B, A, neuron1)
 
+COM = ""
+while COM != "end":
+    print("com | com = any = start, com = end = end")
+    COM = input("com :: ")
+    if COM == "end":
+        break
+    else:
+        X1 = float(input("x1 [o-y]: "))
+        X2 = float(input("x2 [o-x]: "))
+        TEMP_X = [X1, X2]
 
-const_d = 0.2
-bias = 6
+        neuron2 = AI.Neuron([X1, X2], neuron1.w, False, not False)
+        A = AI.ACTIVATE(neuron2, B)
+        AI.LOG(TEMP_X, neuron1.w, B, A, False, not False)
 
-neuron1 = Neuron(23, 4, -2, 0.1)
-neuron2 = Neuron(18, 7, -2, 0.1)
-a1 = activate(neuron1, bias)
-a2 = activate(neuron2, bias)
-
-neuron3 = Neuron(a1, a2, -2, 0.1)
-a3 = activate(neuron3, bias)
-print(a3)
-
-'''neuron.w1 = neuron.w1 + (neuron.x1 * const_d * 1)
-neuron.w2 = neuron.w2 + (neuron.x2 * const_d * 1)
-bias = bias + 1 * const_d
-print(f'{i} >>> a: {a} >>> x1: {neuron.x1}, x2: {neuron.x2}, w1: {neuron.w1}, w2: {neuron.w2}')'''
+        if A > 0:
+            print("False / Obraczka")
+        else:
+            print("True / Dlugopis")

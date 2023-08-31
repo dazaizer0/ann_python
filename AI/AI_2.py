@@ -1,7 +1,7 @@
 # zamien is positive na czy jest poprawne i jakie powu=inno byc a nie jakie jest
-file = open("aidata.txt", 'a')
+from datetime import datetime
 
-class Neuron:
+class Neuron: # answer = False = Obraczka | answer = True = Dlugopis
     def __init__(self, x, w, answer: bool, nreturn: bool):
         self.x = x
         self.w = w
@@ -39,107 +39,87 @@ def TEACH(n: Neuron):
     print(n.w)
 
 def LOG(x, w, b, a, nret, answ):
+    file = open("aidata.txt", 'a')
+    file.write('\n')
+    file.write(str(datetime.now()))
+    file.write(f'X: {x}')
     file.write(f'FIRST >> W: {w}\n')
     file.write(f'BEFORE >> W: {w}, B: {b}, IS_POSITIVE: {answ}\n')
     file.write(f'AFTER >> W: {w}, B: {b}, IS_POSITIVE: {answ}\n')
     file.write(f'>> {a}\n')
     file.write('\n')
+    file.close()
 
 
-D = 0.005
-B = 4
-A = 0
+def TEACH(D, B, A, neuron1: Neuron):
+    i = 1
+    file = open("aidata.txt", 'a')
+    while neuron1.nreturn != neuron1.answer:
+        if i == 1:
+            A = ACTIVATE(neuron1, B)
 
-neuron1 = Neuron([18, 34], [2, 3], False, not False)
+            print(f'FIRST >> W: {neuron1.w}, B: {B}')
+            print(f'{i} >> {A}')
 
-i = 1
-while neuron1.nreturn != neuron1.answer:
-    if i == 1:
-        A = ACTIVATE(neuron1, B)
-
-        print(f'FIRST >> W: {neuron1.w}, B: {B}')
-        print(f'{i} >> {A}')
-
-        if neuron1.answer == True:
-            if A > 0:
-                neuron1.nreturn = True
-            elif A < 0:
-                neuron1.nreturn = False
-        else:
-            if A < 0:
-                neuron1.nreturn = False
-            elif A < 0:
-                neuron1.nreturn = True
-
-        if neuron1.answer == neuron1.nreturn:
             if neuron1.answer == True:
-                print("Obraczka")
-                file.write('obraczka\n')
+                if A > 0:
+                    neuron1.nreturn = True
+                elif A < 0:
+                    neuron1.nreturn = False
             else:
-                print("Dlugopis")
-                file.write('dlugopis\n')
+                if A < 0:
+                    neuron1.nreturn = False
+                elif A < 0:
+                    neuron1.nreturn = True
+
+            if neuron1.answer == neuron1.nreturn:
+                if neuron1.answer == True:
+                    print("Obraczka")
+                    file.write('False /obraczka\n')
+                else:
+                    print("Dlugopis")
+                    file.write('True /dlugopis\n')
+            else:
+                print("...")
+
+            LOG(neuron1.x, neuron1.w, B, A, neuron1.nreturn, neuron1.answer)
+            print()
         else:
-            print("...")
+            is_positive = neuron1.answer
 
-        LOG(neuron1.x, neuron1.w, B, A, neuron1.nreturn, neuron1.answer)
-        print()
-    else:
-        is_positive = neuron1.answer
+            print(f'BEFORE >> W: {neuron1.w}, B: {B}, IS_POSITIVE: {is_positive}')
 
-        print(f'BEFORE >> W: {neuron1.w}, B: {B}, IS_POSITIVE: {is_positive}')
+            neuron1.w = RETURN_NEW_W(D, neuron1.w, neuron1.x, is_positive)
+            B = RETURN_NEW_B(D, B, is_positive)
 
-        neuron1.w = RETURN_NEW_W(D, neuron1.w, neuron1.x, is_positive)
-        B = RETURN_NEW_B(D, B, is_positive)
+            print(f'AFTER >> W: {neuron1.w}, B: {B}, IS_POSITIVE: {is_positive}')
+            A = ACTIVATE(neuron1, B)
+            print(f'{i} >> {A}')
 
-        print(f'AFTER >> W: {neuron1.w}, B: {B}, IS_POSITIVE: {is_positive}')
-        A = ACTIVATE(neuron1, B)
-        print(f'{i} >> {A}')
-
-        if neuron1.answer == True:
-            if A > 0:
-                neuron1.nreturn = True
-            elif A < 0:
-                neuron1.nreturn = False
-        else:
-            if A < 0:
-                neuron1.nreturn = False
-            elif A < 0:
-                neuron1.nreturn = True
-
-        if neuron1.answer == neuron1.nreturn:
             if neuron1.answer == True:
-                print("Obraczka")
-                file.write('obraczka\n')
+                if A > 0:
+                    neuron1.nreturn = True
+                elif A < 0:
+                    neuron1.nreturn = False
             else:
-                print("Dlugopis")
-                file.write('dlugopis\n')
-        else:
-            print("...")
+                if A < 0:
+                    neuron1.nreturn = False
+                elif A < 0:
+                    neuron1.nreturn = True
 
-        LOG(neuron1.x, neuron1.w, B, A, neuron1.nreturn, neuron1.answer)
-        print()
-    i += 1
+            if neuron1.answer == neuron1.nreturn:
+                if neuron1.answer == True:
+                    print("Obraczka")
+                    file.write('False /obraczka\n')
+                else:
+                    print("Dlugopis")
+                    file.write('True /dlugopis\n')
+            else:
+                print("...")
 
+            LOG(neuron1.x, neuron1.w, B, A, neuron1.nreturn, neuron1.answer)
+            print()
+        i += 1
+    file.write(f'{A} | {neuron1.w} | {B} | {neuron1.answer}\n')
+    file.close()
 
-file.write(f'{A} | {neuron1.w} | {B} | {neuron1.answer}\n')
-
-
-COM = ""
-while COM != "end":
-    print("com | com = any, com = end")
-    COM = input("com :: ")
-    if COM == "end":
-        file.close()
-        break
-    else:
-        X1 = float(input("x1 [o-y]: "))
-        X2 = float(input("x2 [o-x]: "))
-
-        neuron2 = Neuron([X1, X2], neuron1.w, False, not False)
-        A = ACTIVATE(neuron2, B)
-        file.write(f'USER-INPUT >>> X1[oy]: {X1}, X2[ox]: {X2}, W: {neuron1.w}, B: {B}, FINAL A: {A} <<< \n')
-
-        if A > 0:
-            print("Obraczka")
-        else:
-            print("dlugopis")
