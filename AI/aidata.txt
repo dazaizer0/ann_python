@@ -55660,3 +55660,11 @@ AFTER >> W: [4, -1], B: 6, IS_POSITIVE: True
 
 False /ring
 90 | [4, -1] | 6 | True
+
+2023-09-01 14:58:07.307083X: [45, 14]FIRST >> W: [2, 3]
+BEFORE >> W: [2, 3], B: 4, IS_POSITIVE: True
+AFTER >> W: [2, 3], B: 4, IS_POSITIVE: True
+>> 136
+
+False /ring
+136 | [2, 3] | 4 | True

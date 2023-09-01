@@ -1,8 +1,10 @@
+import random
 from datetime import datetime
 import tensorflow as tf
 D: float
+B = 6.0
 
-class Neuron: # answer = True = ring | answer = False = pen
+class Neuron:  # answer = True = ring | answer = False = pen
     def __init__(self, x, w, answer: bool, nreturn: bool):
         self.x = x
         self.w = w
@@ -89,13 +91,43 @@ class Neuron: # answer = True = ring | answer = False = pen
         file.close()
 
 
-class Model:  # --------------------------------------------------------------------------------------------------------
-    def __int__(self):
-        model = tf.keras.Sequential([
-            tf.keras.layers.Flatten(input_shape=(28, 28)),
-            tf.keras.layers.Dense(128, activation='relu'),
-            tf.keras.layers.Dense(10)
-        ])
+class NeuronNetwork:
+    def __init__(self, Neuron1: Neuron, Neuron2: Neuron, D: float, B: float):
+        self.Neuron1 = Neuron1
+        self.Neuron2 = Neuron2
+        self.D = D
+        self.B = B
+
+    def GET_RESULT(self, loops: int):
+        for i in range(0, loops):
+            a1 = ACTIVATE(self.Neuron1, B)
+            a2 = ACTIVATE(self.Neuron2, B)
+
+            CHOICE1 = CHECK_NRETURN(self.Neuron1)
+            CHOICE2 = CHECK_NRETURN(self.Neuron2)
+
+            if CHOICE1 == True and CHOICE2 == False:
+                self.B = RETURN_NEW_B(self.D, self.B, self.Neuron2.nreturn)
+                self.Neuron2.w = RETURN_NEW_W(self.D, self.Neuron2.x, self.Neuron2.w, self.Neuron2.answer)
+                print(f'a1: {a1}, a2: {a2}')
+            elif CHOICE1 == False and CHOICE2 == True:
+                self.B = RETURN_NEW_B(self.D, self.B, self.Neuron1.nreturn)
+                self.Neuron1.w = RETURN_NEW_W(self.D, self.Neuron1.x, self.Neuron1.w, self.Neuron1.answer)
+                print(f'a1: {a1}, a2: {a2}')
+            elif CHOICE1 == False and CHOICE2 == False:
+                self.B = RETURN_NEW_B(self.D, self.B, self.Neuron1.nreturn)
+                self.Neuron1.w = RETURN_NEW_W(self.D, self.Neuron1.x, self.Neuron1.w, self.Neuron1.answer)
+                print(f'a1: {a1}, a2: {a2}')
+            else:
+                break
+
+
+
+def CHECK_NRETURN(n: Neuron):
+    if n.nreturn:
+        return n.answer
+    else:
+        return not n.answer
 
 def ACTIVATE(n: Neuron,
              b: float) -> float:
@@ -104,7 +136,7 @@ def ACTIVATE(n: Neuron,
         return a
 
 
-def RETURN_NEW_W(d, w, x, is_positive):
+def RETURN_NEW_W(d, w, x, is_positive: bool):
     if is_positive:
         for i in range(0, len(w)):
             w[i] = w[i] + x[i] * d * 1

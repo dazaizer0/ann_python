@@ -35,6 +35,12 @@ test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
 
 print('\nTest accuracy:', test_acc)
 
+# probability_model = tf.keras.Sequential([model,
+#                                          tf.keras.layers.Softmax()])
+
+# predictions = probability_model.predict(test_images)
+# print(predictions[0])
+
 '''
 plt.figure(figsize=(10, 10))
 for i in range(25):
