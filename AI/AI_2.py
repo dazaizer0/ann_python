@@ -34,14 +34,14 @@ class Neuron:  # answer = False = ring | answer = True = pen
 
                 if self.answer:
                     if A > 0:
-                        self.nreturn = True
-                    elif A < 0:
                         self.nreturn = False
+                    elif A < 0:
+                        self.nreturn = True
                 else:
                     if A < 0:
-                        self.nreturn = False
-                    elif A < 0:
                         self.nreturn = True
+                    elif A > 0:
+                        self.nreturn = False
 
                 if self.answer == self.nreturn:
                     if self.answer:
@@ -70,14 +70,14 @@ class Neuron:  # answer = False = ring | answer = True = pen
 
                 if self.answer:
                     if A > 0:
-                        self.nreturn = True
-                    elif A < 0:
                         self.nreturn = False
+                    elif A < 0:
+                        self.nreturn = True
                 else:
                     if A < 0:
-                        self.nreturn = False
-                    elif A < 0:
                         self.nreturn = True
+                    elif A > 0:
+                        self.nreturn = False
 
                 if self.answer == self.nreturn:
                     if self.answer:
@@ -185,13 +185,13 @@ def TEACH(D, B, A, neuron1: Neuron):
 
             if neuron1.answer:
                 if A > 0:
-                    neuron1.nreturn = True
-                elif A < 0:
                     neuron1.nreturn = False
+                elif A < 0:
+                    neuron1.nreturn = True
             else:
                 if A < 0:
                     neuron1.nreturn = False
-                elif A < 0:
+                elif A > 0:
                     neuron1.nreturn = True
 
             if neuron1.answer == neuron1.nreturn:
@@ -220,11 +220,11 @@ def TEACH(D, B, A, neuron1: Neuron):
 
             if neuron1.answer:
                 if A > 0:
-                    neuron1.nreturn = True
-                elif A < 0:
                     neuron1.nreturn = False
+                elif A < 0:
+                    neuron1.nreturn = True
             else:
-                if A < 0:
+                if A > 0:
                     neuron1.nreturn = False
                 elif A < 0:
                     neuron1.nreturn = True
@@ -283,14 +283,3 @@ def GEN_2V_DATA_LIST(number_of_lists, x_list: list, answer_list: list):
             answer_list.append(True)
         x_list.append(short_temp)
 
-def DEFINE_RULES(X, nreturn: bool, option_true_or_false: bool):  #  IN DEVELOPMENT [ERRORS]
-    if option_true_or_false:
-        if X > 0:
-            nreturn = True
-        else:
-            nreturn = False
-    else:
-        if X < 0:
-            nreturn = True
-        else:
-            nreturn = False
