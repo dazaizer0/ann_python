@@ -282,3 +282,15 @@ def GEN_2V_DATA_LIST(number_of_lists, x_list: list, answer_list: list):
         else:
             answer_list.append(True)
         x_list.append(short_temp)
+
+def DEFINE_RULES(X, nreturn: bool, option_true_or_false: bool):  #  IN DEVELOPMENT [ERRORS]
+    if option_true_or_false:
+        if X > 0:
+            nreturn = True
+        else:
+            nreturn = False
+    else:
+        if X < 0:
+            nreturn = True
+        else:
+            nreturn = False
