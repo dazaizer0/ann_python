@@ -1,15 +1,19 @@
 import random
 from datetime import datetime
 import tensorflow as tf
+import random
 D: float
-B = 6.0
+CB = 6.0
 
-class Neuron:  # answer = True = ring | answer = False = pen
+class Neuron:  # answer = False = ring | answer = True = pen
     def __init__(self, x, w, answer: bool, nreturn: bool):
         self.x = x
         self.w = w
         self.answer = answer
         self.nreturn = nreturn
+
+    def LOG_THIS(self, B: float):
+        print(f'x: {self.x}, w: {self.w}, answer: {self.answer}, nreturn: {self.nreturn}, B: {B}')
 
     def ACTIVATE_THIS(self,
                     b: float) -> float:
@@ -51,6 +55,7 @@ class Neuron:  # answer = True = ring | answer = False = pen
 
                 LOG(self.x, self.w, B, A, self.nreturn, self.answer)
                 print()
+
             else:
                 is_positive = self.answer
 
@@ -100,8 +105,8 @@ class NeuronNetwork:
 
     def GET_RESULT(self, loops: int):
         for i in range(0, loops):
-            a1 = ACTIVATE(self.Neuron1, B)
-            a2 = ACTIVATE(self.Neuron2, B)
+            a1 = ACTIVATE(self.Neuron1, self.B)
+            a2 = ACTIVATE(self.Neuron2, self.B)
 
             CHOICE1 = CHECK_NRETURN(self.Neuron1)
             CHOICE2 = CHECK_NRETURN(self.Neuron2)
@@ -260,3 +265,20 @@ def TEST_NEURON_SIMPLE_RP(B, A, neuron1: Neuron):
                 print("False / ring")
             else:
                 print("True / pen")
+
+def GEN_SHORT2V_LIST(short_temp):
+    while short_temp[0] == short_temp[1]:
+        short_temp = [random.randint(5, 100), random.randint(5, 100)]
+    return short_temp
+
+# answer = False = ring | answer = True = pen
+def GEN_2V_DATA_LIST(number_of_lists, x_list: list, answer_list: list):
+    for i in range(0, number_of_lists):
+        short_temp = [0, 0]
+        short_temp = GEN_SHORT2V_LIST(short_temp)
+
+        if short_temp[0] > short_temp[1]:
+            answer_list.append(False)
+        else:
+            answer_list.append(True)
+        x_list.append(short_temp)

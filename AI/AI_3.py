@@ -3,17 +3,19 @@ import AI_2 as AI
 AI.D = 0.001
 A = 0
 
-n = AI.Neuron([24, 45],
-              [4, -1],
-              True, not True)
+x_totrain = []
+answ_totrain = []
 
-n1 = AI.Neuron([456, 123],
-               [2, 1],
-               False, not False)
+AI.GEN_2V_DATA_LIST(10, x_totrain, answ_totrain)
+print(x_totrain)
+print(answ_totrain)
 
-tn1 = AI.datetime.now()
-nn1 = AI.NeuronNetwork(n, n1, AI.D, AI.B)
-nn1.GET_RESULT(10)
-tn2 = AI.datetime.now()
-td = tn1 - tn2
-print(f'nn time duration: {td}')
+n = AI.Neuron([45, 21], [2, -4], False, not False)
+
+n.LOG_THIS(AI.CB)
+for i in range(0, len(x_totrain)):
+    n = AI.Neuron(x_totrain[i], [2, -4], bool(answ_totrain[i]), not bool(answ_totrain[i]))
+    AI.TEACH(AI.D, AI.CB, A, n)
+
+n.LOG_THIS(AI.CB)
+AI.TEST_NEURON_SIMPLE_RP(AI.CB, A, n)
