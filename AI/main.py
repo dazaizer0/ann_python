@@ -1,11 +1,23 @@
-import AI_2 as AI
-from random import randint
+import tensorflow as tf
+import AILib as AL
 
-AI.D = 0.0001
-B = 4
+B = 6
+D = 0.01
 A = 0
 
-neuron1 = AI.Neuron([45, 14], [2, 3], True, not True)
+xtrain: list = []
+answertrain: list = []
 
-AI.TEACH(AI.D, B, A, neuron1)
-AI.TEST_NEURON_SIMPLE_RP(B, A, neuron1)
+AL.GEN_2V_DATA_LIST(200, xtrain, answertrain)
+print(xtrain)
+print(answertrain)
+
+neuron_w = [-2, 0.1]
+n1 = AL.Neuron([1, 0], neuron_w, False, True)
+
+for i in range(0, len(xtrain)):
+    n1 = AL.Neuron(xtrain[i], neuron_w, bool(answertrain[i]), not bool(answertrain[i]))
+    n1.FIT(A, B, D)
+    neuron_w = n1.w
+
+AL.TEST_NEURON_SIMPLE_RP(B, A, n1)
