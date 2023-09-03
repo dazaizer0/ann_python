@@ -1,4 +1,3 @@
-import tensorflow as tf
 import AILib as AL
 
 B = 6

@@ -80,17 +80,27 @@ class Neuron: # answer = True = ring | answer = False = pen
                 print()
             i += 1
 
-def LOG_OTHER(neuron_x, neuron_w, b_Bias, a_Result, nreturn, answer, file_name):
-    file = open(file_name, 'a')
-    file.write(f'{str(datetime.now())} - LOG_O - X: {neuron_x}, W: {neuron_w}, B: {b_Bias}, nreturn: {nreturn}, answer: {answer}, A: {a_Result}\n')
-    file.close()
-
 def GET_TRANSFERRED_DATA(from_neuron1: Neuron, from_neuron2: Neuron, to_neuron: Neuron, B):
     A1 = from_neuron1.ACTIVATE_THIS(B)
     A2 = from_neuron2.ACTIVATE_THIS(B)
 
     to_neuron.x = [A1, A2]
     return to_neuron.ACTIVATE_THIS(B)
+
+class Network:  # IN DEVELOPMENT
+    def __init__(self, neuron_list: list, layers: int):
+        self.neuron_list = neuron_list
+        self.layers = layers
+
+    def ACTIVATE_THIS_NETWORK(self):
+        for i1, neuron_layer in enumerate(self.neuron_list):
+            for i2, neuron in enumerate(neuron_layer):
+                print(f'{i1}/{i2} >> {neuron}')
+
+def LOG_OTHER(neuron_x, neuron_w, b_Bias, a_Result, nreturn, answer, file_name):
+    file = open(file_name, 'a')
+    file.write(f'{str(datetime.now())} - LOG_O - X: {neuron_x}, W: {neuron_w}, B: {b_Bias}, nreturn: {nreturn}, answer: {answer}, A: {a_Result}\n')
+    file.close()
 
 def CHECK_NRETURN(n: Neuron):
     if n.nreturn:
