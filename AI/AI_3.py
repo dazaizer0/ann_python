@@ -12,10 +12,10 @@ print(answ_totrain)
 
 n = AI.Neuron([45, 21], [2, -4], False, not False)
 
-n.LOG_THIS(AI.CB)
+print(n)
 for i in range(0, len(x_totrain)):
     n = AI.Neuron(x_totrain[i], [2, -4], bool(answ_totrain[i]), not bool(answ_totrain[i]))
-    AI.TEACH(AI.D, AI.CB, A, n)
+    n.TEACH(AI.D, AI.CB, A)
 
-n.LOG_THIS(AI.CB)
+print(n)
 AI.TEST_NEURON_SIMPLE_RP(AI.CB, A, n)

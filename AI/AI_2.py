@@ -12,8 +12,13 @@ class Neuron:  # answer = False = ring | answer = True = pen
         self.answer = answer
         self.nreturn = nreturn
 
-    def LOG_THIS(self, B: float):
-        print(f'x: {self.x}, w: {self.w}, answer: {self.answer}, nreturn: {self.nreturn}, B: {B}')
+    def __repr__(self):
+        return f'x: {self.x}, w: {self.w}, answer: {self.answer}, nreturn: {self.nreturn}'
+
+    def LOG_TO_FILE(self, A, file_name):
+        file = open(file_name, 'a')
+        file.write(f'{str(datetime.now())} - LOG >> X: {self.x}, W: {self.w}, answer: {self.answer}, nreturn: {self.nreturn}, A: {A}\n')
+        file.close()
 
     def ACTIVATE_THIS(self,
                     b: float) -> float:
@@ -21,12 +26,11 @@ class Neuron:  # answer = False = ring | answer = True = pen
             a = ((self.x[i] * self.w[i]) + (self.x[i + 1] * self.w[i + 1])) + b
             return a
 
-    def TEACH_THIS(self, D, B, A, neuron1):
+    def TEACH(self, D, B, A):
         i = 1
-        file = open("aidata.txt", 'a')
-        while neuron1.nreturn != neuron1.answer:
+        while self.nreturn != self.answer:
             if i == 1:
-                A = ACTIVATE(neuron1, B)
+                A = ACTIVATE(self, B)
 
                 print(f'NEURON >> X: {self.x}')
                 print(f'FIRST >> W: {self.w}, B: {B}')
@@ -39,23 +43,20 @@ class Neuron:  # answer = False = ring | answer = True = pen
                         self.nreturn = True
                 else:
                     if A < 0:
-                        self.nreturn = True
-                    elif A > 0:
                         self.nreturn = False
+                    elif A > 0:
+                        self.nreturn = True
 
                 if self.answer == self.nreturn:
                     if self.answer:
                         print("ring")
-                        file.write('False /ring\n')
                     else:
                         print("pen")
-                        file.write('True /pen\n')
                 else:
                     print("...")
 
-                LOG(self.x, self.w, B, A, self.nreturn, self.answer)
+                self.LOG_TO_FILE(A, 'aidata.txt')
                 print()
-
             else:
                 is_positive = self.answer
 
@@ -65,7 +66,7 @@ class Neuron:  # answer = False = ring | answer = True = pen
                 B = RETURN_NEW_B(D, B, is_positive)
 
                 print(f'AFTER >> W: {self.w}, B: {B}, IS_POSITIVE: {is_positive}')
-                A = ACTIVATE(neuron1, B)
+                A = ACTIVATE(self, B)
                 print(f'{i} >> {A}')
 
                 if self.answer:
@@ -74,27 +75,22 @@ class Neuron:  # answer = False = ring | answer = True = pen
                     elif A < 0:
                         self.nreturn = True
                 else:
-                    if A < 0:
-                        self.nreturn = True
-                    elif A > 0:
+                    if A > 0:
                         self.nreturn = False
+                    elif A < 0:
+                        self.nreturn = True
 
                 if self.answer == self.nreturn:
                     if self.answer:
                         print("ring")
-                        file.write('False /ring\n')
                     else:
                         print("pen")
-                        file.write('True /pen\n')
                 else:
                     print("...")
 
-                LOG(self.x, self.w, B, A, self.nreturn, self.answer)
+                self.LOG_TO_FILE(A, 'aidata.txt')
                 print()
             i += 1
-        file.write(f'{A} | {self.w} | {B} | {self.answer}\n')
-        file.close()
-
 
 class NeuronNetwork:
     def __init__(self, Neuron1: Neuron, Neuron2: Neuron, D: float, B: float):
@@ -126,7 +122,10 @@ class NeuronNetwork:
             else:
                 break
 
-
+def LOG_OTHER(x, w, b, a, nret, answ, file_name):
+    file = open(file_name, 'a')
+    file.write(f'{str(datetime.now())} - LOG_O - X: {x}, W: {w}, B: {b}, nreturn: {nret}, answer: {answ}, A: {a}\n')
+    file.close()
 
 def CHECK_NRETURN(n: Neuron):
     if n.nreturn:
@@ -158,93 +157,6 @@ def RETURN_NEW_B(d, b, is_positive):
     else:
         return b + -1 * d
 
-
-def LOG(x, w, b, a, nret, answ):
-    file = open("aidata.txt", 'a')
-    file.write('\n')
-    file.write(str(datetime.now()))
-    file.write(f'X: {x}')
-    file.write(f'FIRST >> W: {w}\n')
-    file.write(f'BEFORE >> W: {w}, B: {b}, IS_POSITIVE: {answ}\n')
-    file.write(f'AFTER >> W: {w}, B: {b}, IS_POSITIVE: {answ}\n')
-    file.write(f'>> {a}\n')
-    file.write('\n')
-    file.close()
-
-
-def TEACH(D, B, A, neuron1: Neuron):
-    i = 1
-    file = open("aidata.txt", 'a')
-    while neuron1.nreturn != neuron1.answer:
-        if i == 1:
-            A = ACTIVATE(neuron1, B)
-
-            print(f'NEURON >> X: {neuron1.x}')
-            print(f'FIRST >> W: {neuron1.w}, B: {B}')
-            print(f'{i} >> {A}')
-
-            if neuron1.answer:
-                if A > 0:
-                    neuron1.nreturn = False
-                elif A < 0:
-                    neuron1.nreturn = True
-            else:
-                if A < 0:
-                    neuron1.nreturn = False
-                elif A > 0:
-                    neuron1.nreturn = True
-
-            if neuron1.answer == neuron1.nreturn:
-                if neuron1.answer:
-                    print("ring")
-                    file.write('False /ring\n')
-                else:
-                    print("pen")
-                    file.write('True /pen\n')
-            else:
-                print("...")
-
-            LOG(neuron1.x, neuron1.w, B, A, neuron1.nreturn, neuron1.answer)
-            print()
-        else:
-            is_positive = neuron1.answer
-
-            print(f'BEFORE >> W: {neuron1.w}, B: {B}, IS_POSITIVE: {is_positive}')
-
-            neuron1.w = RETURN_NEW_W(D, neuron1.w, neuron1.x, is_positive)
-            B = RETURN_NEW_B(D, B, is_positive)
-
-            print(f'AFTER >> W: {neuron1.w}, B: {B}, IS_POSITIVE: {is_positive}')
-            A = ACTIVATE(neuron1, B)
-            print(f'{i} >> {A}')
-
-            if neuron1.answer:
-                if A > 0:
-                    neuron1.nreturn = False
-                elif A < 0:
-                    neuron1.nreturn = True
-            else:
-                if A > 0:
-                    neuron1.nreturn = False
-                elif A < 0:
-                    neuron1.nreturn = True
-
-            if neuron1.answer == neuron1.nreturn:
-                if neuron1.answer:
-                    print("ring")
-                    file.write('False /ring\n')
-                else:
-                    print("pen")
-                    file.write('True /pen\n')
-            else:
-                print("...")
-
-            LOG(neuron1.x, neuron1.w, B, A, neuron1.nreturn, neuron1.answer)
-            print()
-        i += 1
-    file.write(f'{A} | {neuron1.w} | {B} | {neuron1.answer}\n')
-    file.close()
-
 def TEST_NEURON_SIMPLE_RP(B, A, neuron1: Neuron):
     COM = ""
     while COM != "end":
@@ -253,13 +165,13 @@ def TEST_NEURON_SIMPLE_RP(B, A, neuron1: Neuron):
         if COM == "end":
             break
         else:
-            X1 = float(input("x1 [o-y]: "))
-            X2 = float(input("x2 [o-x]: "))
+            X1 = float(input("x1 [o-y][mm]: "))
+            X2 = float(input("x2 [o-x][mm]: "))
             TEMP_X = [X1, X2]
 
             neuron2 = Neuron([X1, X2], neuron1.w, False, not False)
             A = ACTIVATE(neuron2, B)
-            LOG(TEMP_X, neuron1.w, B, A, False, not False)
+            LOG_OTHER(TEMP_X, neuron1.w, B, A, False, not False, 'aidata.txt')
 
             if A > 0:
                 print("False / ring")
