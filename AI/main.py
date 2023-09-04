@@ -1,4 +1,5 @@
 import AILib as AL
+import AIDataReader as adr
 
 B = 6
 D = 0.01
@@ -6,6 +7,9 @@ A = 0
 
 xtrain: list = []
 answertrain: list = []
+
+reader = adr.AIDataReader('aidata.txt')
+print(reader)
 
 AL.GEN_2V_DATA_LIST(200, xtrain, answertrain)
 print(xtrain)
