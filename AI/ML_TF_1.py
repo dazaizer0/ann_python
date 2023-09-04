@@ -1,5 +1,4 @@
 import tensorflow as tf
-import AI_2 as AI
 
 print(f'TF_ver: {tf.__version__}')
 

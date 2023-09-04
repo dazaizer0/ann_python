@@ -1,12 +1,21 @@
-import AILib as AL
+import threading
 
-B = 6
-D = 0.01
-A = 0
+def pierwsza_petla():
+    for i in range(1, 6):
+        print(f'Wątek 1: Iteracja {i}')
 
-network = AL.Network([[AL.Neuron([1, 2], [3, 4], False, True),
-                      AL.Neuron([5, 6], [7, 8], False, True)],
-                      [AL.Neuron([9, 8], [7, 6], True, False)]
-                      ], 2)
+def druga_petla():
+    for i in range(1, 6):
+        print(f'Wątek 2: Iteracja {i}')
 
-network.ACTIVATE_THIS_NETWORK()
+
+watek1 = threading.Thread(target=pierwsza_petla)
+watek2 = threading.Thread(target=druga_petla)
+
+watek1.start()
+watek2.start()
+
+watek1.join()
+watek2.join()
+
+print("Program zakończony.")
