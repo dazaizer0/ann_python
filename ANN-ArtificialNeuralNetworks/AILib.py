@@ -38,7 +38,7 @@ class Neuron:
 
     def LOG_DATA(self, a_result, b_Bias, file_name):
         file = open(file_name, 'a')
-        file.write(f'{str(datetime.now())} >> X: {self.x}, W: {self.w},B: {b_Bias}, answer: {self.answer}, nreturn: {self.nreturn}, A: {a_result}\n')
+        file.write(f'{str(datetime.now())}, {self.x}, {self.w}, {b_Bias}, {a_result}, {self.answer}, {self.nreturn},\n')
         file.close()
 
     def ACTIVATE(self,
@@ -112,15 +112,16 @@ class Network:  # IN DEVELOPMENT
         self.neuron_list = neuron_list
         self.layers = layers
 
-    def ACTIVAT(self):
+    def __repr__(self):
         for i1, neuron_layer in enumerate(self.neuron_list):
             for i2, neuron in enumerate(neuron_layer):
                 print(f'{i1}/{i2} >> {neuron}')
 
 def LOG_OTHER(neuron_x, neuron_w, b_Bias, a_Result, nreturn, answer, file_name):
     file = open(file_name, 'a')
-    file.write(f'{str(datetime.now())} - LOG_O - X: {neuron_x}, W: {neuron_w}, B: {b_Bias}, nreturn: {nreturn}, answer: {answer}, A: {a_Result}\n')
+    file.write(f'OTHER, {str(datetime.now())}, {neuron_x}, {neuron_w}, {b_Bias}, {nreturn}, {answer}, {a_Result}, \n')
     file.close()
+
 def RETURN_NEW_W(d_Accuracy, neuron_w, neuron_x, answer: bool):
     if answer:
         for i in range(0, len(neuron_w)):

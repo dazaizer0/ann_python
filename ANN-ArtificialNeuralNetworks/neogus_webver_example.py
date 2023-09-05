@@ -9,13 +9,11 @@ A = 0
 xtrain: list = []
 answers: list = []
 
-
 AL.GEN_2VAL_LISTS_ANSWERS(200, xtrain, answers)
 
 neuron_w = [-2, 0.1]
 neuron = AL.Neuron([1, 0], neuron_w, False, True)
 mode = AL.Mode(False, 0, A, neuron.nreturn)
-
 
 for i in range(0, len(xtrain)):
     neuron = AL.Neuron(xtrain[i], neuron_w, bool(answers[i]), not bool(answers[i]))
