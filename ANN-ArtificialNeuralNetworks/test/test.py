@@ -1,7 +1,4 @@
 import AILib as a
 
-ret = True
-
-mode = a.Mode(False, 0, 5, ret)
-ret = mode.SET_MODE_MOL()
-print(ret)
+n = a.Neuron([2, 5, 13, 3], [-4, 0.5, -2, 4], True, False)
+print(n.ACTIVATE(6))

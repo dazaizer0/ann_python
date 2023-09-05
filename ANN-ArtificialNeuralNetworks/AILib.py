@@ -4,6 +4,14 @@ import random
 
 class Mode:
     def __init__(self, mode, const_float, number, nreturn):
+        """
+        in MOL mode:
+        mode = false: if number > const_float else:
+        mode = true: if number < cont_float else:
+
+        in ND mode:
+        distance(number, const_float)
+        """
         self.mode = mode
         self.const_float = const_float
         self.number = number
@@ -28,6 +36,14 @@ class Mode:
 
 class Neuron:
     def __init__(self, x, w, answer: bool, nreturn: bool):
+        """
+        The basic class that stores data and functions on neurons (accepts only even numbers of inputs and weights).
+        All other more developed networks operate on this class
+        :param x:
+        :param w:
+        :param answer:
+        :param nreturn:
+        """
         self.x = x
         self.w = w
         self.answer = answer
@@ -43,11 +59,27 @@ class Neuron:
 
     def ACTIVATE(self,
                     Bias: float) -> float:
+        """
+        DEF ACTIVATE:
+        activate neuron() - even numbers only
+
+        :param Bias:
+        :return:
+        """
+        a = 0
         for i in range(0, len(self.x), 2):
-            a = ((self.x[i] * self.w[i]) + (self.x[i + 1] * self.w[i + 1])) + Bias
-            return a
+            a += ((self.x[i] * self.w[i]) + (self.x[i + 1] * self.w[i + 1])) + Bias
+        return a
 
     def TRAIN_NEURON(self, a_Result, b_Bias, d_Accuracy, mode_rules: Mode):
+        """
+        The function trains the model based on the data provided and returns more and more correct dynamic parameters
+        :param a_Result:
+        :param b_Bias:
+        :param d_Accuracy:
+        :param mode_rules:
+        :return:
+        """
         i = 1
         while self.nreturn != self.answer:
             if i == 1:
@@ -101,6 +133,14 @@ class Neuron:
             i += 1
 
 def RETURN_TRANSFERRED_DATA(from_neuron1: Neuron, from_neuron2: Neuron, to_neuron: Neuron, B):
+    """
+    function returns a calculated from two already given neurons
+    :param from_neuron1:
+    :param from_neuron2:
+    :param to_neuron:
+    :param B:
+    :return:
+    """
     A1 = from_neuron1.ACTIVATE(B)
     A2 = from_neuron2.ACTIVATE(B)
 

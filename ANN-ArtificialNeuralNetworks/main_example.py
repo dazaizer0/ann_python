@@ -21,9 +21,9 @@ def TEST(b_Bias, a_Result, n: AL.Neuron):
             AL.LOG_OTHER(TEMP_X, n.w, b_Bias, a_Result, False, not False, 'data/aidata.txt')
 
             if a_Result > 0:
-                print(f'False / ring, A: {a_Result}')
+                print(f'False / RING, A: {a_Result}')
             else:
-                print(f'True / pen, A: {a_Result}')
+                print(f'True / PEN, A: {a_Result}')
 
 
 B = 6
