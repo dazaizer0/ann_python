@@ -12,6 +12,8 @@ class var:
     def type(self):
         print(self.var_type)
 
+def out(what):
+    print(what)
 
 direction = input("direction: ")
 vars = {"zero": var(int, 0), }
@@ -42,20 +44,41 @@ try:
                 else:
                     vars[data[i + 2]].value = vars[data[i + 3]].value + vars[data[i + 4]].value
 
+            if data[i + 1] == "var-":
+                if vars[data[i + 2]].var_type == "int":
+                    b = int(vars[data[i + 3]].value)
+                    c = int(vars[data[i + 4]].value)
+                    vars[data[i + 2]].value = b - c
+                else:
+                    vars[data[i + 2]].value = vars[data[i + 3]].value - vars[data[i + 4]].value
+
+            if data[i + 1] == "var*":
+                if vars[data[i + 2]].var_type == "int":
+                    b = int(vars[data[i + 3]].value)
+                    c = int(vars[data[i + 4]].value)
+                    vars[data[i + 2]].value = b * c
+                else:
+                    vars[data[i + 2]].value = vars[data[i + 3]].value * vars[data[i + 4]].value
+
+            if data[i + 1] == "var/":
+                if vars[data[i + 2]].var_type == "int":
+                    b = int(vars[data[i + 3]].value)
+                    c = int(vars[data[i + 4]].value)
+                    vars[data[i + 2]].value = b * c
+                else:
+                    vars[data[i + 2]].value = vars[data[i + 3]].value / vars[data[i + 4]].value
+
+
         # show variables
         if data[i] == "vars":
-            print(vars)
-
-        # loop
-        if data[i] == "while":
-            print("not yet")
+            out(vars)
 
         # out
         if data[i] == "out":
             if data[i + 1] == "var":
-                print(vars[data[i + 2]])
+                out(vars[data[i + 2]])
             else:
-                print(data[i + 1])
+                out(data[i + 1])
 
 except:
     print("not found")
