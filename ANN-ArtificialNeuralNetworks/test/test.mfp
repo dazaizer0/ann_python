@@ -1,0 +1,5 @@
+cvar int 8 zm1;
+cvar int 6 zm2;
+cvar int 0 zm3;
+oper var+ zm3 zm1 zm2;
+out var zm3;

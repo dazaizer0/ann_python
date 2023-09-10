@@ -9,46 +9,53 @@ class var:
     def __sub__(self, other):
         return self.value + other
 
+    def type(self):
+        print(self.var_type)
 
-vars = [var(int, 0), ]
 
-file = open('test.txt', 'r')
-data = file.read()
-data = data.split(';')
+direction = input("direction: ")
+vars = {"zero": var(int, 0), }
 
-for i in data:
-    i.replace('\n', '')
+try:
+    file = open(direction, 'r')
+    data = file.read()
+    data = data.replace('\n', '')
+    data = data.replace(' ', ';')
+    data = data.split(';')
 
-for i in range(len(data)):
-    if data[i] == "cvar":
-        temp_var = var(str(data[i + 1]), data[i + 2])
-        vars.append(temp_var)
+    for i in data:
+        i.replace('\n', '')
 
-    if data[i] == "out":
-        if data[i + 1] == "var":
-            nr = int(data[i + 2])
-            print(vars[nr])
-        if data[i + 1] == "sum":
-            if data[i + 2] == "var":
-                what = data[i + 2]
-                sum = 0
-                for l in range(len(what)):
-                    var_list = []
-                    try:
-                        var_list.append(int(vars[l].value))
-                    except:
-                        continue
-                    for nr in var_list:
-                        sum += nr
-                print(sum)
+    for i in range(len(data)):
+        # create variable
+        if data[i] == "cvar":
+            temp_var = var(str(data[i + 1]), data[i + 2])
+            vars[data[i + 3]] = temp_var
+
+        # add variables
+        if data[i] == "oper":
+            if data[i + 1] == "var+":
+                if vars[data[i + 2]].var_type == "int":
+                    b = int(vars[data[i + 3]].value)
+                    c = int(vars[data[i + 4]].value)
+                    vars[data[i + 2]].value = b + c
+                else:
+                    vars[data[i + 2]].value = vars[data[i + 3]].value + vars[data[i + 4]].value
+
+        # show variables
+        if data[i] == "vars":
+            print(vars)
+
+        # loop
+        if data[i] == "while":
+            print("not yet")
+
+        # out
+        if data[i] == "out":
+            if data[i + 1] == "var":
+                print(vars[data[i + 2]])
             else:
-                what = data[i + 2]
-                sum = 0
-                for l in what:
-                    try:
-                        l = int(l)
-                    except:
-                        continue
-                    if i != "+":
-                        sum += l
-                print(sum)
+                print(data[i + 1])
+
+except:
+    print("not found")
