@@ -1,1 +1,4 @@
-out 75 85 66 65;
+cre int ora 3;
+ cre int ora2 7;
+  out ora;
+   out ora2;
