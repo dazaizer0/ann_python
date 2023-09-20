@@ -1,3 +1,6 @@
-cre ste hello HelloWorld;
-  out hello;
+cre int one 4563432;
+ cre int two 346313346;
+  one *= 8;
+   out one;
+   show dur;
     return 1;

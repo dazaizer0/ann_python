@@ -1,8 +1,12 @@
+import time
+
+
 file = open("main.txt", 'r')
 
 data = file.read()
 data = data.replace('\n', '')
 data = data.replace(';', ' ;')
+data = data.replace(',', ' , ')
 data = data.split(' ')
 
 class variable:
@@ -26,10 +30,45 @@ variables = {
 
 data_len = len(data)
 rep = data[data_len - 2]
+show_time = False
 
 if data[data_len - 3] == "return":
+    start_time = time.time()
     for r in range(int(rep)):
         for i in range(len(data)):
+            if data[i] == "show" and data[i + 2] == ";":
+                if data[i + 1] == "dur":
+                    show_time = True
+            if data[i] in variables.keys():
+                if data[i + 1] == "+=":
+                    try:
+                        temp: int = int(variables[data[i]].var) + int(variables[data[i + 2]].var)
+                    except:
+                        temp: int = int(variables[data[i]].var) + int(data[i + 2])
+                    variables[data[i]].var = temp
+                if data[i + 1] == "-=":
+                    try:
+                        temp: int = int(variables[data[i]].var) - int(variables[data[i + 2]].var)
+                    except:
+                        temp: int = int(variables[data[i]].var) - int(data[i + 2])
+                    variables[data[i]].var = temp
+                if data[i + 1] == "*=":
+                    try:
+                        temp: int = int(variables[data[i]].var) * int(variables[data[i + 2]].var)
+                    except:
+                        temp: int = int(variables[data[i]].var) * int(data[i + 2])
+                    variables[data[i]].var = temp
+                if data[i + 1] == "/=":
+                    try:
+                        temp: int = int(variables[data[i]].var) / int(variables[data[i + 2]].var)
+                    except:
+                        temp: int = int(variables[data[i]].var) / int(data[i + 2])
+                    try:
+                        temp = int(temp)
+                        variables[data[i]].var = temp
+                    except:
+                        continue
+
             if data[i] == "cre" and data[i + 4] == ";":
                 temp: variable = variable(data[i + 1], data[i + 3])
                 variables[data[i + 2]] = temp
@@ -49,3 +88,6 @@ if data[data_len - 3] == "return":
                             output += "-"
                         j += 1
                     print(output)
+    end_time = time.time()
+    if show_time:
+        print(end_time - start_time)
