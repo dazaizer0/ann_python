@@ -24,23 +24,28 @@ variables = {
 
 }
 
-for i in range(len(data)):
-    if data[i] == "cre" and data[i + 4]:
-        temp: variable = variable(data[i + 1], data[i + 3])
-        variables[data[i + 2]] = temp
+data_len = len(data)
+rep = data[data_len - 2]
 
-    if data[i] == "out":
-        if data[i + 1] in variables.keys():
-            print(variables[data[i + 1]])
-        else:
-            j = i + 1
-            output = ""
-            while data[j] != ";":
-                try:
-                    temp: int = int(data[j])
-                    char = chr(temp)
-                    output += char
-                except:
-                    output += "-"
-                j += 1
-            print(output)
+if data[data_len - 3] == "return":
+    for r in range(int(rep)):
+        for i in range(len(data)):
+            if data[i] == "cre" and data[i + 4] == ";":
+                temp: variable = variable(data[i + 1], data[i + 3])
+                variables[data[i + 2]] = temp
+
+            if data[i] == "out":
+                if data[i + 1] in variables.keys():
+                    print(variables[data[i + 1]])
+                else:
+                    j = i + 1
+                    output = ""
+                    while data[j] != ";":
+                        try:
+                            temp: int = int(data[j])
+                            char = chr(temp)
+                            output += char
+                        except:
+                            output += "-"
+                        j += 1
+                    print(output)

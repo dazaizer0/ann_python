@@ -1,4 +1,3 @@
-cre int ora 3;
- cre int ora2 7;
-  out ora;
-   out ora2;
+cre ste hello HelloWorld;
+  out hello;
+    return 1;
