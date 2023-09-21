@@ -1,6 +1,6 @@
-cre int one 4563432;
- cre int two 346313346;
-  one *= 8;
-   out one;
-    show dur;
-     return 1;
+cre int one 22382; ->
+cre str string dupa; ->
+one += 1; ->
+out string; ->
+out one; ->
+return 1;

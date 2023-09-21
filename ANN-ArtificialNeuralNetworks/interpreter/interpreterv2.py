@@ -7,6 +7,7 @@ data = file.read()
 data = data.replace('\n', '')
 data = data.replace(';', ' ;')
 data = data.replace(',', ' , ')
+data = data.replace('->', ' ')
 data = data.split(' ')
 
 class variable:
@@ -60,9 +61,9 @@ if data[data_len - 3] == "return":
                     variables[data[i]].var = temp
                 if data[i + 1] == "/=":
                     try:
-                        temp: int = int(variables[data[i]].var) / int(variables[data[i + 2]].var)
+                        temp: float = float(variables[data[i]].var) / float(variables[data[i + 2]].var)
                     except:
-                        temp: int = int(variables[data[i]].var) / int(data[i + 2])
+                        temp: float = float(variables[data[i]].var) / float(data[i + 2])
                     try:
                         temp = int(temp)
                         variables[data[i]].var = temp
