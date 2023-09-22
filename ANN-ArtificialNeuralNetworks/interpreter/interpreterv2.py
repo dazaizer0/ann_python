@@ -1,4 +1,6 @@
 import time
+import AILib as ai
+import AIDataReader as reader
 
 
 file = open("main.txt", 'r')
