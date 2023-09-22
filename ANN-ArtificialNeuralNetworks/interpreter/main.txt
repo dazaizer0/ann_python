@@ -1,8 +1,7 @@
-cre int one 2234534382; ->
-cre int two 345435352; ->
-cre str string dupa; ->
-one *= two; ->
-out string; ->
-out one; ->
-show dur; ->
+cre listint xtrain 1.2; ->
+cre listbool answers ; ->
+new 2val_lists 10 xtrain answers; ->
+out xtrain; ->
+out answers; ->
 return 1;
+

@@ -73,8 +73,42 @@ if data[data_len - 3] == "return":
                         continue
 
             if data[i] == "cre" and data[i + 4] == ";":
-                temp: variable = variable(data[i + 1], data[i + 3])
-                variables[data[i + 2]] = temp
+                if data[i + 1] == "listint":
+                    that_list: list
+                    try:
+                        that_list = data[i + 3].split('.')
+
+                        for l in range(len(that_list)):
+                            that_list[l] = int(that_list[l])
+
+                        temp: variable = variable(data[i + 1], that_list)
+                        variables[data[i + 2]] = temp
+                    except:
+                        that_list = []
+
+                elif data[i + 1] == "listbool":
+                    that_list: list
+                    try:
+                        that_list = data[i + 3].split('.')
+
+                        for l in range(len(that_list)):
+                            if that_list[l] == "true":
+                                that_list[l] = bool(True)
+                            else:
+                                that_list[l] = bool(False)
+                    except:
+                        that_list = []
+
+                    temp: variable = variable(data[i + 1], that_list)
+                    variables[data[i + 2]] = temp
+
+                else:
+                    temp: variable = variable(data[i + 1], data[i + 3])
+                    variables[data[i + 2]] = temp
+
+            if data[i] == "new":
+                if data[i + 1] == "2val_lists":
+                    ai.GEN_2VAL_LISTS_ANSWERS(int(data[i + 2]), list(data[i + 3]), list(data[i + 4]))
 
             if data[i] == "out":
                 if data[i + 1] in variables.keys():
