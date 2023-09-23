@@ -19,4 +19,4 @@ Mode
 AIDataReader - READ_AS_LIST
 
 # ANN-LANG Documentation 
-1. soon
+soon
