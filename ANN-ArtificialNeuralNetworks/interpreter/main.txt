@@ -1,7 +1,13 @@
+mod func [ ->
+    cre str test HelloWorld; ->
+    out test; ->
+]start; ->
+
 cre listint xtrain 1.2; ->
 cre listbool answers ; ->
 new 2val_lists 10 xtrain answers; ->
 out xtrain; ->
 out answers; ->
+
 return 1;
 

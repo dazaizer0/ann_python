@@ -3,8 +3,7 @@ import time
 
 start = time.time()
 
-for i in range(41):
-    print(f'{i} - {rs.fib(i)}')
+rs.fib_to(43)
 
 end = time.time()
 print(f'time: {end - start}')
