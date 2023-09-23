@@ -17,9 +17,15 @@ fn fib_to(nr: i32) {
     }
 }
 
+#[pyfunction]
+fn sum(a: i32, b: i32) -> i32 {
+    a + b
+}
+
 /// A Python module implemented in Rust.
 #[pymodule]
 fn lib_rs(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(fib_to, m)?)?;
+    m.add_function(wrap_pyfunction!(sum, m)?)?;
     Ok(())
 }

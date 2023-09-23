@@ -1,13 +1,11 @@
-mod func [ ->
-    cre str test HelloWorld; ->
-    out test; ->
+mod main [ ->
+    cre int a 54453; ->
+    cre int i 5; ->
+    cre int b 456475; ->
+    a += b; ->
+    out a; ->
+    dfloop[ temp_int 1; to_val 10; from_val 5; ]start; ->
+    show dur; ->
 ]start; ->
-
-cre listint xtrain 1.2; ->
-cre listbool answers ; ->
-new 2val_lists 10 xtrain answers; ->
-out xtrain; ->
-out answers; ->
-
 return 1;
 
