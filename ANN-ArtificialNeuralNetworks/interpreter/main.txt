@@ -1,11 +1,11 @@
 mod main [ ->
-    cre int a 54453; ->
-    cre int i 5; ->
+    cre int a 54; ->
     cre int b 456475; ->
-    a += b; ->
+    a *= b; ->
     out a; ->
-    dfloop[ temp_int 1; to_val 10; from_val 5; ]start; ->
-    show dur; ->
+    out Hello World; ->
+    out /n; ->
+    out 74; -> out 98; ->
 ]start; ->
 return 1;
 

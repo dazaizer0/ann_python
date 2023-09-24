@@ -58,24 +58,28 @@ if data[data_len - 3] == "return":
             # mod end
             # math start
             if data[i] in variables.keys():
+                # sum
                 if data[i + 1] == "+=":
                     try:
                         temp: int = rs.sum(int(variables[data[i]].var), int(variables[data[i + 2]].var))
                     except:
                         temp: int = rs.sum(int(variables[data[i]].var), int(data[i + 2]))
                     variables[data[i]].var = temp
+                # sub
                 if data[i + 1] == "-=":
                     try:
-                        temp: int = int(variables[data[i]].var) - int(variables[data[i + 2]].var)
+                        temp: int = rs.sub(int(variables[data[i]].var), int(variables[data[i + 2]].var))
                     except:
-                        temp: int = int(variables[data[i]].var) - int(data[i + 2])
+                        temp: int = rs.sub(int(variables[data[i]].var), int(data[i + 2]))
                     variables[data[i]].var = temp
+                # mul
                 if data[i + 1] == "*=":
                     try:
-                        temp: int = int(variables[data[i]].var) * int(variables[data[i + 2]].var)
+                        temp: int = rs.mul(int(variables[data[i]].var), int(variables[data[i + 2]].var))
                     except:
-                        temp: int = int(variables[data[i]].var) * int(data[i + 2])
+                        temp: int = rs.mul(int(variables[data[i]].var), int(data[i + 2]))
                     variables[data[i]].var = temp
+                # div
                 if data[i + 1] == "/=":
                     try:
                         temp: float = float(variables[data[i]].var) / float(variables[data[i + 2]].var)
@@ -123,33 +127,12 @@ if data[data_len - 3] == "return":
                     variables[data[i + 2]] = temp
             # variables end
             # loop start
-            if data[i] == "dfloop[":
-                j: int = i
-                start_value = 0
-                i_value = 0
-                if_variable: bool = False
-                var_name = ""
-                end_value = 0
+            if data[i] == "loop[":
+                j: int = i + 1
                 while data[j] != "]start":
-                    if data[j] == "temp_int":
-                        i_value = int(data[j + 1])
-                    if data[j] == "to_val":
-                        end_value = int(data[j + 1])
-                    if data[j] == "from_val":
-                        if data[j + 1] in variables.keys():
-                            var_name = data[j + 1]
-                            if_variable = True
-                        else:
-                            start_value = int(data[j + 1])
+                    print(f'{data[j]} != any; -> ', end="")
                     j += 1
-                if if_variable:
-                    while variables[var_name].var != end_value:
-                        variables[var_name].var += int(i_value)
-                        print(start_value)
-                else:
-                    while start_value != end_value:
-                        start_value += i_value
-                        print(start_value)
+                print()
             # loop end
             # ailib functions start
             if data[i] == "new":
@@ -165,13 +148,16 @@ if data[data_len - 3] == "return":
                     output = ""
                     while data[j] != ";":
                         try:
+                            if data[j] == "/n":
+                                data[j] = ""
+                                print()
                             temp: int = int(data[j])
                             char = chr(temp)
                             output += char
                         except:
-                            output += "-"
+                            output += data[j]
                         j += 1
-                    print(output)
+                    print(output, end="")
             # out end
     end_time = time.time()
     if show_time:

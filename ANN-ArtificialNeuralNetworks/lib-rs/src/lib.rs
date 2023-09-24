@@ -22,10 +22,22 @@ fn sum(a: i32, b: i32) -> i32 {
     a + b
 }
 
+#[pyfunction]
+fn sub(a: i32, b: i32) -> i32 {
+    a - b
+}
+
+#[pyfunction]
+fn mul(a: i32, b: i32) -> i32 {
+    a * b
+}
+
 /// A Python module implemented in Rust.
 #[pymodule]
 fn lib_rs(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(fib_to, m)?)?;
     m.add_function(wrap_pyfunction!(sum, m)?)?;
+    m.add_function(wrap_pyfunction!(sub, m)?)?;
+    m.add_function(wrap_pyfunction!(mul, m)?)?;
     Ok(())
 }
