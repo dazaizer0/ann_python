@@ -18,4 +18,5 @@ Mode
 
 AIDataReader - READ_AS_LIST
 
-# [ANN-LANG Documentation](https://github.com/dazaizer0/Neogus-ANN/releases/tag/v0.1.2)
+# [ANN-LANG Documentation](https://github.com/dazaizer0/Neogus-ANN/releases)
+by dazai
