@@ -1,7 +1,8 @@
 mod main [ ->
-    cre int a 2; ->
-    a /= 8 rep(); ->
+    cre int a 1; ->
+    cre int b 1; ->
+    a += b rep(); ->
     out a; ->
 
 ]start; ->
-rep 2;
+rep 5;

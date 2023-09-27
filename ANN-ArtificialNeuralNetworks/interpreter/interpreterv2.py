@@ -45,6 +45,16 @@ def do_it(data):
         start_time = time.time()
         for r in range(int(rep)):
             for i in range(len(data)):
+                # use other files
+                if data[i] == "file" and data[i + 3] == "::start":
+                    f = open(str(data[i + 1]), 'r')
+                    f_data = f.read()
+                    f_data = f_data.replace('\n', '')
+                    f_data = f_data.replace(';', ' ;')
+                    f_data = f_data.replace(',', ' , ')
+                    f_data = f_data.replace('->', ' ')
+                    f_data = f_data.split(' ')
+                    do_it(f_data)
                 # mod start
                 if data[i] == "mod" and data[i + 2] == "[":
                     j = i
@@ -92,7 +102,7 @@ def do_it(data):
 
                         variables[data[i]].var = temp
                     # mul
-                    if data[i + 1] == "*=":
+                    if data[i + 1] == "*=": # error must be fixed
                         temp: int
                         if data[i + 3] == "rep()":
                             try:
