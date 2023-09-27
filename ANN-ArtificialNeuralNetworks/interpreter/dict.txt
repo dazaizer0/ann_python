@@ -1,6 +1,0 @@
-cre int one 2234534382; ->
-cre int two 345435352; ->
-one *= two; ->
-out one; ->
-show dur; ->
-return 1;

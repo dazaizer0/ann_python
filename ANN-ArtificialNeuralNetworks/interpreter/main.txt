@@ -1,11 +1,7 @@
 mod main [ ->
-    cre int a 54; ->
-    cre int b 456475; ->
-    a *= b; ->
+    cre int a 2; ->
+    a /= 8 rep(); ->
     out a; ->
-    out Hello World; ->
-    out /n; ->
-    out 74; -> out 98; ->
-]start; ->
-return 1;
 
+]start; ->
+rep 2;
