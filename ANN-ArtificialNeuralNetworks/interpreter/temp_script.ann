@@ -1,0 +1,14 @@
+mod start [ ->
+ cre int a 1; ->
+ cre int b 1; ->
+ a += b rep(); ->
+ out a; ->
+
+ out /n; ->
+
+ cre str A dupa; ->
+ out A; ->
+
+]start; ->
+rep 2;
+

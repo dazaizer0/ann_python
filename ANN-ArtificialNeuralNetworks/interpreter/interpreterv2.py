@@ -5,13 +5,18 @@ import lib_rs as rs
 
 
 file = open("main.txt", 'r')
-
 data = file.read()
-data = data.replace('\n', '')
-data = data.replace(';', ' ;')
-data = data.replace(',', ' , ')
-data = data.replace('->', ' ')
-data = data.split(' ')
+
+def convert_to_code(data) -> list:
+    data = data.replace('\n', '')
+    data = data.replace(';', ' ;')
+    data = data.replace(',', ' , ')
+    data = data.replace('->', ' ')
+    data = data.split(' ')
+    return data
+
+
+data = convert_to_code(data)
 
 class variable:
     def __init__(self, typ, var):
@@ -28,7 +33,9 @@ class variable:
         return str(self.var)
 
 
-def do_it(data):
+def do_it(data, is_ide: bool):
+
+    program_output = ""
 
     data_len = len(data)
     rep = data[data_len - 2]
@@ -190,7 +197,10 @@ def do_it(data):
                 # out start
                 if data[i] == "out":
                     if data[i + 1] in variables.keys():
-                        print(variables[data[i + 1]])
+                        if is_ide:
+                            program_output += str(variables[data[i + 1]].var)
+                        else:
+                            print(variables[data[i + 1]])
                     else:
                         j = i + 1
                         output = ""
@@ -198,19 +208,31 @@ def do_it(data):
                             try:
                                 if data[j] == "/n":
                                     data[j] = ""
-                                    print()
+                                    if is_ide:
+                                        program_output += '\n'
+                                    else:
+                                        print()
                                 temp: int = int(data[j])
                                 char = chr(temp)
                                 output += char
                             except:
                                 output += data[j]
                             j += 1
-                        print(output, end="")
+                        if is_ide:
+                            program_output += output
+                        else:
+                            print(output, end="")
 
                 # out end
         end_time = time.time()
         if show_time:
-            print(end_time - start_time)
+            if is_ide:
+                program_output += f'\n  {end_time - start_time} \n'
+            else:
+                print(end_time - start_time)
+
+    if is_ide:
+        return program_output
 
 
-do_it(data)
+do_it(data, False)
