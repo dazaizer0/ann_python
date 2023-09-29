@@ -39,9 +39,6 @@ def open_documentation():
 root = tk.Tk()
 root.title("ANN IDE")
 root.configure(bg="grey4")
-root.iconbitmap(
-    r'C:\Users\mydat\Documents\_python\NeogusAI_Github\NeogusAI\ANN-ArtificialNeuralNetworks\interpreter\annidelogo.png'
-)
 
 # INPUT
 code_input = scrolledtext.ScrolledText(root, wrap=tk.WORD, width=60, height=20, bg="grey8", fg="plum2")

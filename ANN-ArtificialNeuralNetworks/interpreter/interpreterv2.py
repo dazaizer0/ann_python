@@ -1,6 +1,5 @@
 import time
-import AILib as ai
-import AIDataReader as reader
+# import AILib as ai
 import lib_rs as rs
 
 
@@ -31,7 +30,6 @@ class variable:
 
     def __repr__(self):
         return str(self.var)
-
 
 def do_it(data, is_ide: bool):
 
@@ -176,23 +174,27 @@ def do_it(data, is_ide: bool):
                         variables[data[i + 2]] = temp
                 # variables end
                 # loop start
-                if data[i] == "loop":
-                    j = i
+                if data[i] == "for[":
+                    for_start_i = i + 2
+                    for_number = int(data[i + 1])
+                    j = 0
                     todo = []
-                    while_value: int = int(data[i + 1])
-                    while data[j] != "]start":
-                        todo.append(data[j])
+                    while data[i] != "]start":
                         j += 1
+                        i += 1
+                        todo.append(data[j])
 
-                    k = 0
-                    for i in range(while_value):
-                        do_it(todo)
-                        k += 1
-                # loop end
+                    todo.remove(']start')
+                    todo.remove(str(for_number))
+                    print(todo)
+
+                    for x in range(for_number):
+                        do_it(todo, is_ide)
+
                 # ailib functions start
                 if data[i] == "new":
-                    if data[i + 1] == "2val_lists":
-                        ai.GEN_2VAL_LISTS_ANSWERS(int(data[i + 2]), list(data[i + 3]), list(data[i + 4]))
+                    '''if data[i + 1] == "2val_lists":
+                        ai.GEN_2VAL_LISTS_ANSWERS(int(data[i + 2]), list(data[i + 3]), list(data[i + 4]))'''
                 # ailib functions end
                 # out start
                 if data[i] == "out":

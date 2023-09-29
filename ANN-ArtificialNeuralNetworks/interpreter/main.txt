@@ -1,8 +1,4 @@
-mod main [ ->
-    cre int a 1; ->
-    cre int b 1; ->
-    a += b rep(); ->
-    out a; ->
-
-]start; ->
-rep 5;
+cre int a 1;->
+cre int b 1;->
+out a;->
+rep 1;
