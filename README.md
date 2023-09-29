@@ -19,5 +19,5 @@ Mode
 AIDataReader - READ_AS_LIST
 
 # [ANN-LANG Documentation](https://github.com/dazaizer0/Neogus-ANN/releases)
-project state: suspended indefinitely
+project state: suspended indefinitely |
 by dazai
