@@ -18,6 +18,10 @@ Mode
 
 AIDataReader - READ_AS_LIST
 
+# ANN-LIB EXAMPLES
+- https://github.com/dazaizer0/Neogus-ANN/blob/main/ANN-ArtificialNeuralNetworks/neogus_webver_example.py
+- https://github.com/dazaizer0/Neogus-ANN/blob/main/ANN-ArtificialNeuralNetworks/main_example.py
+
 # [ANN-LANG Documentation](https://github.com/dazaizer0/Neogus-ANN/releases)
 project state: suspended indefinitely |
 by dazai
