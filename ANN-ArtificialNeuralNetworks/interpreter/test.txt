@@ -1,7 +1,8 @@
 mod main [ ->
-    cre int a 10; ->
+    cre int a 15; ->
     a /= 5; ->
     out a; ->
+    out /n; ->
 
 ]start; ->
-rep 5;
+rep 1;
