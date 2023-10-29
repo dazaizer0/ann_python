@@ -72,6 +72,20 @@ def do_it(data, is_ide: bool):
                         j += 1
                     fns[data[i + 1]] = data[i + 3]
                 # mod end
+                # if
+                if data[i] == "if":
+                    if data[i + 2] == "==":
+                        if data[i + 1] == data[i + 3]:
+                            if is_ide:
+                                program_output += "true"
+                            else:
+                                print("true")
+                        else:
+                            if is_ide:
+                                program_output += "false"
+                            else:
+                                print("false")
+                # if end
                 # math start
                 if data[i] in variables.keys():
                     # sum
@@ -137,6 +151,8 @@ def do_it(data, is_ide: bool):
                                 temp = float(variables[data[i]].var) / float(data[i + 2])
 
                             variables[data[i]].var = temp
+                    if data[i + 1] == "/-1":
+                        variables[data[i]].var = variables[data[i]].var[::-1]
                 # math end
                 # variables start
                 if data[i] == "cre" and data[i + 4] == ";":
