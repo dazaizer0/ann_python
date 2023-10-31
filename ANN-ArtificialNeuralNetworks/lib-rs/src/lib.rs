@@ -1,6 +1,6 @@
+// PYTHON -&&- RUST -==- MATURIN LIB
 use pyo3::prelude::*;
 
-/// Formats the sum of two numbers as string.
 fn fib(n: i32) -> i32 {
     if n <= 1 {
         return n;
