@@ -1,30 +1,6 @@
 import AILib as AL
 import AIDataReader as adr
 
-def TEST(b_Bias, a_Result, n: AL.Neuron):
-    COM = ""
-    while COM != "end":
-        print("com | com = any = start, com = end = end")
-        COM = input("com :: ")
-        if COM == "end":
-            break
-        else:
-            X1 = float(input("x1 [o-y][mm]: "))
-            X2 = float(input("x2 [o-x][mm]: "))
-            TEMP_X = [X1, X2]
-
-            n2 = AL.Neuron([X1, X2], n.w, False, not False)
-            print(n)
-
-            a_Result = n2.ACTIVATE(b_Bias)
-
-            AL.LOG_OTHER(TEMP_X, n.w, b_Bias, a_Result, False, not False, 'data/aidata.txt')
-
-            if a_Result > 0:
-                print(f'False / RING, A: {a_Result}')
-            else:
-                print(f'True / PEN, A: {a_Result}')
-
 
 B = 6
 D = 0.01
@@ -49,4 +25,26 @@ for i in range(0, len(xtrain)):
     n1.TRAIN_NEURON(A, B, D, mode)
     neuron_w = n1.w
 
-TEST(B, A, n1)
+COM = ""
+while COM != "end":
+    print("com | com = any = start, com = end = end")
+    COM = input("com :: ")
+    if COM == "end":
+        break
+    else:
+        X1 = float(input("x1 [o-y][mm]: "))
+        X2 = float(input("x2 [o-x][mm]: "))
+        TEMP_X = [X1, X2]
+
+        n2 = AL.Neuron([X1, X2], n1.w, False, not False)
+        print(n1)
+
+        a_Result = n2.ACTIVATE(B)
+
+        AL.LOG_OTHER(TEMP_X, n1.w, B, a_Result, False, not False, 'data/aidata.txt')
+
+        if a_Result > 0:
+            print(f'False / RING, A: {a_Result}')
+        else:
+            print(f'True / PEN, A: {a_Result}')
+
