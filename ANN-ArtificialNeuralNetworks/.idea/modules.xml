@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ANN-ArtificialNeuralNetworks.iml" filepath="$PROJECT_DIR$/.idea/ANN-ArtificialNeuralNetworks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../artificial_neural_networks/.idea/ANN-ArtificialNeuralNetworks.iml" filepath="$PROJECT_DIR$/../artificial_neural_networks/.idea/ANN-ArtificialNeuralNetworks.iml" />
     </modules>
   </component>
 </project>

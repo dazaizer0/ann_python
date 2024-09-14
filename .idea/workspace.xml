@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d7da7855-0a18-4595-bff8-1236304c4a17" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/ANN-ArtificialNeuralNetworks/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANN-ArtificialNeuralNetworks/.idea/ANN-ArtificialNeuralNetworks.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANN-ArtificialNeuralNetworks/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANN-ArtificialNeuralNetworks/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANN-ArtificialNeuralNetworks/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANN-ArtificialNeuralNetworks/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANN-ArtificialNeuralNetworks/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANN-ArtificialNeuralNetworks/data/aidata.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ANN-ArtificialNeuralNetworks/data/aidata.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANN-ArtificialNeuralNetworks/main_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/ANN-ArtificialNeuralNetworks/main_example.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="yt6y3ax7" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2m38iDamCac2DZo2eg4Fqpr1GHS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/mydat/Documents/_python/ann/ANN-ArtificialNeuralNetworks"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d7da7855-0a18-4595-bff8-1236304c4a17" name="Changes" comment="" />
+      <created>1726294023569</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1726294023569</updated>
+    </task>
+    <servers />
+  </component>
+</project>
